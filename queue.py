@@ -18,8 +18,6 @@ class Queue:
 
     def print_queue(self):
         temp = self.front
-        if self.length == 0:
-            print("Queue empty")
         while temp is not None:
             print(temp.value)
             temp = temp.next
@@ -30,26 +28,25 @@ class Queue:
         if self.length == 1:
             temp.next = new_node
             self.end = new_node
+            self.length += 1
             return True
-        temp.next = new_node
-        self.end = new_node
-        self.length += 1
-        return True
+        else:
+            temp.next = new_node
+            self.end = new_node
+            self.length += 1
+            return True
 
     def dequeue(self):
-        if self.length == 1:
-            temp = self.front
-            self.front == None
-            self.end == None
+        if self.length == 0:
+            print("Queue empty")
+            return None
+        else:
+            prev = self.front
+            temp =  self.front.next if self.length != 0 else None
+            prev.next = None
+            self.front = temp
             self.length -= 1
-            return temp
-
-        prev = self.front
-        temp = self.front.next
-        self.front.next = None
-        self.front = temp
-        self.length -= 1
-        return prev
+            return prev
 
     
 class_line = Queue("Auggie")
@@ -58,7 +55,7 @@ class_line.enqueue("Koda")
 
 class_line.print_queue()
 print("---")
-
+print("Removing from front of line")
 class_line.dequeue()
 class_line.dequeue()
 class_line.dequeue()
