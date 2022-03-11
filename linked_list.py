@@ -5,6 +5,7 @@
 # append
 # pop
 # find
+# remove
 
 class Node:
     def __init__(self, value):
@@ -90,10 +91,37 @@ class LinkedList:
         else:
             return False
 
+    def remove_value(self, value):
+        valuePresent = self.find(value)
+        if self.length == 1 and value == self.head.value:
+            self.head = None
+            self.tail = None
+            print("Linked List Cleared")
+            return True
+        if valuePresent == False:
+            print("Value not found")
+            return False
+        else:
+            prev = self.head
+            temp = prev.next
+            after = temp.next.next
+            while temp.value != value:
+                after = after.next
+                prev = temp
+                temp = temp.next
+
+            prev.next = after
+            temp.next = None
+            self.length -= 1
+            return temp
+
+        
+
 my_list = LinkedList(5)
-my_list.append(4)
-my_list.append(7)
-my_list.append(9)
-my_list.insert(3, 11)
+# my_list.append(4)
+# my_list.append(7)
+# my_list.append(9)
+# my_list.insert(3, 11)
 print("-----")
 my_list.print_list()
+my_list.remove_value(5)
