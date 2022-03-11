@@ -23,18 +23,21 @@ class Queue:
             temp = temp.next
 
     def enqueue(self, value):
-        new_node = Node(value)
-        temp = self.end
-        if self.length == 1:
-            temp.next = new_node
-            self.end = new_node
-            self.length += 1
-            return True
+        if self.length == 0:
+            self.__init__(value)
         else:
-            temp.next = new_node
-            self.end = new_node
-            self.length += 1
-            return True
+            new_node = Node(value)
+            temp = self.end
+            if self.length == 1:
+                temp.next = new_node
+                self.end = new_node
+                self.length += 1
+                return True
+            else:
+                temp.next = new_node
+                self.end = new_node
+                self.length += 1
+                return True
 
     def dequeue(self):
         if self.length == 0:
@@ -52,14 +55,13 @@ class Queue:
 class_line = Queue("Auggie")
 class_line.enqueue("Paige")
 class_line.enqueue("Koda")
+class_line.enqueue("Grant")
+class_line.enqueue("Angela")
 
 class_line.print_queue()
 print("---")
 print("Removing from front of line")
-class_line.dequeue()
-class_line.dequeue()
-class_line.dequeue()
-class_line.dequeue()
+
 print("---")
 
 class_line.print_queue()
